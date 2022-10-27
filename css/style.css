@@ -1,11 +1,12 @@
 * {
     font-family: "Titillium Web", sans-serif;
+    margin: 0;
 }
 
 header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     background-color: #d4c36a;
     height: 10vh;
     font-size: 5vmin;
@@ -13,7 +14,7 @@ header {
 }
 
 header > * {
-    padding: 1vh 2vw;
+    padding: 0vmin 2vmax;
 }
 
 main {
@@ -44,7 +45,88 @@ main {
 }
 
 .quiz {
-    background-color: black;
+    background-color: white;
     height: 70vh;
     width: 90%;
+    border-radius: 2vmin;
+    display: flex;
+    flex-direction: column;
+    padding: 1vh 2vw;
+}
+
+.question {
+    font-size: 5vmin;
+    width: 100%;
+    height: 100%;
+}
+
+.questionText {
+    text-align: center;
+}
+
+.answerContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5%;
+}
+
+.button {
+    display: inline;
+    position: relative;
+    color: black;
+    transition: all 0.5s;
+    background-color: #d4c36a;
+    border-radius: 10px;
+}
+
+.button::before,
+.button::after {
+    content: "";
+    position: absolute;
+    transition: all 0.5s;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.button span {
+    transition: all 1s;
+    transform: scale(1, 1);
+}
+
+.buttonContainer {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.answer {
+    padding: 2vmin 5vmax;
+}
+
+.answer::before {
+    opacity: 0;
+    background: rgba(20, 192, 149, 0.4);
+    transform: scale(1, 0.1);
+}
+
+.answer:hover::before {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+#highScores {
+    background-color: #123652;
+    color: white;
+    border-radius: 10px;
+}
+#timeLeft {
+    background-color: #123652;
+    color: white;
+    border-radius: 10px;
 }
