@@ -60,7 +60,7 @@ main {
     height: 100%;
 }
 
-.questionText {
+#questionText {
     text-align: center;
 }
 
@@ -121,10 +121,14 @@ main {
 }
 
 #highScores {
-    background-color: #123652;
-    color: white;
+    color: black;
     border-radius: 10px;
 }
+
+#highScores:hover {
+    color: #549e70;
+}
+
 #timeLeft {
     background-color: #123652;
     color: white;
