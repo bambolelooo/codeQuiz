@@ -1,0 +1,50 @@
+* {
+    font-family: "Titillium Web", sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #d4c36a;
+    height: 10vh;
+    font-size: 5vmin;
+    flex-wrap: wrap;
+}
+
+header > * {
+    padding: 1vh 2vw;
+}
+
+main {
+    display: flex;
+    background-color: #123652;
+    height: 90vh;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    flex-flow: column;
+}
+
+.coolWave {
+    /* background-repeat: no-repeat; */
+    aspect-ratio: 900/100;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-color: #123652;
+}
+
+.coolWave:nth-of-type(1) {
+    background-image: url(../img/quizWaveTop.svg);
+}
+
+.coolWave:nth-of-type(2) {
+    background-image: url(../img/quizWaveBottom.svg);
+}
+
+.quiz {
+    background-color: black;
+    height: 70vh;
+    width: 90%;
+}
