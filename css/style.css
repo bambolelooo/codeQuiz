@@ -62,6 +62,7 @@ main {
 
 #questionText {
     text-align: center;
+    padding: 2vh 1vw;
 }
 
 .answerContainer {
