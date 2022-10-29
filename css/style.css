@@ -149,6 +149,10 @@ main {
 }
 
 .congrats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-size: 5vmin;
 }
 .score {
@@ -157,4 +161,5 @@ main {
 
 .scoreButtons {
     display: flex;
+    gap: 5vw;
 }
