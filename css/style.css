@@ -163,3 +163,31 @@ main {
     display: flex;
     gap: 5vw;
 }
+
+.continue {
+    padding: 0vmin 5vmax;
+    max-width: 30%;
+    text-align: center;
+}
+
+.continue::before {
+    opacity: 0;
+    background: rgba(105, 43, 248, 0.4);
+    transform: scale(1, 0.1);
+}
+
+.continue:hover::before {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 2vh;
+}
+.score {
+    font-size: 5vh;
+}

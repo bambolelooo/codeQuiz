@@ -26,32 +26,39 @@
             <button class="button answer startButton">Start the quiz!</button>
             <div class="enterName"></div>
             <div class="scoreboard">
-                <h2 class="congrats">
-                    <p>Congratuations on completing this quiz.</p>
-                    <p>
-                        You have a great result! Enter your name below to
-                        continue
-                    </p>
-                </h2>
-                <div class="score"></div>
-                <div class="scoreButtons">
-                    <button class="button answer startButton">
-                        Do it again!
-                    </button>
-                    <button class="button answer viewScoreboard">
-                        View scoreboard
-                    </button>
+                <div class="congrats">
+                    <div class="form">
+                        <p>Congratuations on completing this quiz.</p>
+                        <p>Enter your name below to continue:</p>
+                        <input
+                            type="text"
+                            id="name"
+                            size="50%"
+                            style="
+                                background-color: #123652;
+                                color: white;
+                                border-radius: 10px;
+                                text-align: center;
+                            "
+                        />
+                        <button class="button continue">Continue</button>
+                    </div>
+                </div>
+                <div class="finalPage">
+                    <div class="score" style="text-align: center"></div>
+                    <div class="scoreButtons">
+                        <button class="button answer startButton">
+                            Do it again!
+                        </button>
+                        <button class="button answer viewScoreboard">
+                            View scoreboard
+                        </button>
+                    </div>
                 </div>
             </div>
             <section class="quiz">
                 <div class="question">
-                    <p id="questionText">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Eveniet deleniti consequuntur eos corporis non, eius
-                        consectetur assumenda magnam at voluptas quaerat
-                        delectus incidunt, dolorum atque vero sint. Temporibus,
-                        fuga ducimus.
-                    </p>
+                    <p id="questionText"></p>
                 </div>
                 <div class="answerContainer">
                     <div class="buttonContainer">
