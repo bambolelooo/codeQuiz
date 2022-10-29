@@ -134,3 +134,11 @@ function showScore() {
     startButton[1].addEventListener("click", displayFirstQuestion);
     // viewScoreboard.addEventListener("click", showScoreboard)
 }
+
+function compareSecondColumn(a, b) {
+    if (a[1] === b[1]) {
+        return 0;
+    } else {
+        return a[1] > b[1] ? -1 : 1;
+    }
+}
