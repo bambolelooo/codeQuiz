@@ -44,48 +44,49 @@ const q4 = {
 
 const questions = [q1, q2, q3, q4];
 
-questions.sort(() => Math.random() - 0.5);
-for (let i = 0; i < questions.length; i++) {}
-let questionCounter = 0;
+let questionCounter = [0, 0, 0]; // [total, right, wrong]
 
-welcomeButton.addEventListener("click", () => {
+welcomeButton.addEventListener("click", displayFirstQuestion);
+
+function displayFirstQuestion() {
+    questions.sort(() => Math.random() - 0.5); // shuffle the questions
     quiz.style.display = "flex";
     welcomeButton.style.display = "none";
-    let question = questions[questionCounter];
+    let question = questions[questionCounter[0]];
     questionText.innerHTML = question.q;
     ans1.innerHTML = question.a1;
     ans2.innerHTML = question.a2;
     ans3.innerHTML = question.a3;
     ans4.innerHTML = question.a4;
-    console.log(`question ${questionCounter + 1} displayed`);
-});
+    console.log(`question ${questionCounter[0] + 1} displayed`);
+    answerContainer.addEventListener("click", checkAnswerAndGoToNext);
+}
 
-answerContainer.addEventListener("click", function (event) {
-    function runQuiz(questionCounter) {
-        let question = questions[questionCounter];
-        questionText.innerHTML = question.q;
-        ans1.innerHTML = question.a1;
-        ans2.innerHTML = question.a2;
-        ans3.innerHTML = question.a3;
-        ans4.innerHTML = question.a4;
-        console.log(`question ${questionCounter} displayed`);
-    }
+function checkAnswerAndGoToNext(event) {
     let ans = event.target;
     if (ans.matches("button")) {
-        if (ans.innerHTML === questions[questionCounter].corr) {
+        if (ans.innerHTML === questions[questionCounter[0]].corr) {
             console.log(`correct`);
-            questionCounter++;
-            runQuiz(questionCounter);
-            return;
         } else {
             console.log(
-                `you chose ${ans.innerHTML} the corrct was ${questions[questionCounter].corr}`
+                `you chose ${ans.innerHTML} the corrct was ${
+                    questions[questionCounter[0]].corr
+                }`
             );
-            questionCounter++;
-            runQuiz(questionCounter);
-            return;
+            questionCounter[2]++;
+        }
+        questionCounter[0]++;
+        if (questionCounter[0] === questions.length) {
+            questionCounter[0] = 0;
+            //view scoreboard
+        } else {
+            let question = questions[questionCounter[0]];
+            questionText.innerHTML = question.q;
+            ans1.innerHTML = question.a1;
+            ans2.innerHTML = question.a2;
+            ans3.innerHTML = question.a3;
+            ans4.innerHTML = question.a4;
+            console.log(`question ${questionCounter[0] + 1} displayed`);
         }
     }
-});
-
-runQuiz(0);
+}
