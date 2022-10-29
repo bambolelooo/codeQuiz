@@ -6,8 +6,11 @@ const ans4 = document.querySelector("#ans4");
 const answerContainer = document.querySelector(".answerContainer");
 const quiz = document.querySelector(".quiz");
 const timeLeft = document.querySelector("#timeLeft");
-const welcomeButton = document.querySelector(".welcomeButton");
+const startButton = document.querySelectorAll(".startButton");
+const scoreboard = document.querySelector(".scoreboard");
+const score = document.querySelector(".score");
 quiz.style.display = "none";
+scoreboard.style.display = "none";
 
 const q1 = {
     q: `This is question 1. The corrct answer is 1`,
@@ -46,12 +49,13 @@ const questions = [q1, q2, q3, q4];
 
 let questionCounter = [0, 0, 0]; // [total, right, wrong]
 
-welcomeButton.addEventListener("click", displayFirstQuestion);
+startButton[0].addEventListener("click", displayFirstQuestion);
 
 function displayFirstQuestion() {
+    scoreboard.style.display = "none";
     questions.sort(() => Math.random() - 0.5); // shuffle the questions
     quiz.style.display = "flex";
-    welcomeButton.style.display = "none";
+    startButton[0].style.display = "none";
     let question = questions[questionCounter[0]];
     questionText.innerHTML = question.q;
     ans1.innerHTML = question.a1;
@@ -64,7 +68,10 @@ function displayFirstQuestion() {
 
 function checkAnswerAndGoToNext(event) {
     let ans = event.target;
+
+    // check if clicked on button
     if (ans.matches("button")) {
+        // if the answer matches the correct in object
         if (ans.innerHTML === questions[questionCounter[0]].corr) {
             console.log(`correct`);
         } else {
@@ -75,10 +82,12 @@ function checkAnswerAndGoToNext(event) {
             );
             questionCounter[2]++;
         }
+        console.log(`question counter 1: ${questionCounter[0]}`);
         questionCounter[0]++;
+        console.log(`question counter 2: ${questionCounter[0]}`);
         if (questionCounter[0] === questions.length) {
             questionCounter[0] = 0;
-            //view scoreboard
+            viewScoreboard();
         } else {
             let question = questions[questionCounter[0]];
             questionText.innerHTML = question.q;
@@ -89,4 +98,10 @@ function checkAnswerAndGoToNext(event) {
             console.log(`question ${questionCounter[0] + 1} displayed`);
         }
     }
+}
+
+function viewScoreboard() {
+    scoreboard.style.display = "flex";
+    quiz.style.display = "none";
+    startButton[1].addEventListener("click", displayFirstQuestion);
 }

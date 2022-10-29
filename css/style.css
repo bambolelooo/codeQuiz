@@ -135,3 +135,20 @@ main {
     color: white;
     border-radius: 10px;
 }
+
+.scoreboard {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 70vh;
+    width: 90%;
+    border-radius: 2vmin;
+    padding: 1vh 2vw;
+}
+
+.congrats {
+    font-size: 5vmin;
+}
+.score {
+    font-size: 3vmin;
+}
