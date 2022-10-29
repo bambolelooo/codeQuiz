@@ -144,6 +144,8 @@ main {
     width: 90%;
     border-radius: 2vmin;
     padding: 1vh 2vw;
+    align-items: center;
+    justify-content: center;
 }
 
 .congrats {
@@ -151,4 +153,8 @@ main {
 }
 .score {
     font-size: 3vmin;
+}
+
+.scoreButtons {
+    display: flex;
 }

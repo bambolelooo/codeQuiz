@@ -47,7 +47,7 @@ const q4 = {
 
 const questions = [q1, q2, q3, q4];
 
-let questionCounter = [0, 0, 0]; // [total, right, wrong]
+let questionCounter = [0, 0]; // [total, right, wrong]
 
 startButton[0].addEventListener("click", displayFirstQuestion);
 
@@ -74,20 +74,20 @@ function checkAnswerAndGoToNext(event) {
         // if the answer matches the correct in object
         if (ans.innerHTML === questions[questionCounter[0]].corr) {
             console.log(`correct`);
+            questionCounter[1]++;
         } else {
             console.log(
                 `you chose ${ans.innerHTML} the corrct was ${
                     questions[questionCounter[0]].corr
                 }`
             );
-            questionCounter[2]++;
         }
         console.log(`question counter 1: ${questionCounter[0]}`);
         questionCounter[0]++;
         console.log(`question counter 2: ${questionCounter[0]}`);
         if (questionCounter[0] === questions.length) {
             questionCounter[0] = 0;
-            viewScoreboard();
+            viewScore();
         } else {
             let question = questions[questionCounter[0]];
             questionText.innerHTML = question.q;
@@ -100,8 +100,14 @@ function checkAnswerAndGoToNext(event) {
     }
 }
 
-function viewScoreboard() {
+let totalScores = [];
+
+function viewScore() {
     scoreboard.style.display = "flex";
     quiz.style.display = "none";
+    score.innerHTML = `${questionCounter[1]}
+    correct out of ${questions.length} (${
+        (questionCounter[1] / questions.length) * 100
+    }%)`;
     startButton[1].addEventListener("click", displayFirstQuestion);
 }
