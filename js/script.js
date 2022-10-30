@@ -7,17 +7,18 @@ const answerContainer = document.querySelector(".answerContainer");
 const quiz = document.querySelector(".quiz");
 const timeLeft = document.querySelector("#timeLeft");
 const startButton = document.querySelectorAll(".startButton");
-const scoreboard = document.querySelector(".scoreboard");
+const currentScore = document.querySelector(".currentScore");
 const score = document.querySelector(".score");
 const continueButton = document.querySelector(".continue");
 quiz.style.display = "none";
-scoreboard.style.display = "none";
+currentScore.style.display = "none";
 const finalPage = document.querySelector(".finalPage");
 const scoreButtons = document.querySelector(".scoreButtons");
 const inputName = document.querySelector("#name");
 const viewScoreboard = document.querySelector(".viewScoreboard");
 const form = document.querySelector(".form");
 const congrats = document.querySelector(".congrats");
+const scoreboard = document.querySelector(".scoreboard");
 
 const q1 = {
     q: `This is question 1. The corrct answer is 1`,
@@ -59,7 +60,9 @@ let questionCounter = [0, 0]; // [total, right]
 startButton[0].addEventListener("click", displayFirstQuestion);
 
 function displayFirstQuestion() {
-    scoreboard.style.display = "none";
+    startTimer();
+    scoreboard.style.display = "flex";
+    currentScore.style.display = "none";
     questions.sort(() => Math.random() - 0.5); // shuffle the questions
     quiz.style.display = "flex";
     startButton[0].style.display = "none";
@@ -82,6 +85,7 @@ function checkAnswerAndGoToNext(event) {
             console.log(`correct`);
             questionCounter[1]++;
         } else {
+            time = time - 5;
             console.log(
                 `you chose ${ans.innerHTML} the corrct was ${
                     questions[questionCounter[0]].corr
@@ -107,7 +111,7 @@ function checkAnswerAndGoToNext(event) {
 let scores = [];
 
 function enterName() {
-    scoreboard.style.display = "flex";
+    currentScore.style.display = "flex";
     congrats.style.display = "flex";
     quiz.style.display = "none";
     finalPage.style.display = "none";
@@ -132,7 +136,7 @@ function showScore() {
     }%)`;
     questionCounter = [0, 0];
     startButton[1].addEventListener("click", displayFirstQuestion);
-    // viewScoreboard.addEventListener("click", showScoreboard)
+    viewScoreboard.addEventListener("click", showScoreboard);
 }
 
 function compareSecondColumn(a, b) {
@@ -141,4 +145,37 @@ function compareSecondColumn(a, b) {
     } else {
         return a[1] > b[1] ? -1 : 1;
     }
+}
+
+function showScoreboard() {
+    for (let i = 0; i < scores.length; i++) {
+        for (let j = 0; j < 2; j++) {
+            let div = document.createElement("div");
+            div.style.minWidth = "50%";
+            // div.style.height = "100px";
+            // div.style.background = "red";
+            // div.style.color = "white";
+            div.style.display = "flex";
+            div.style.alignItems = "center";
+            div.style.justifyContent = "center";
+            div.innerHTML = `${scores[i][j]}`;
+            scoreboard.appendChild(div);
+        }
+    }
+    finalPage.style.display = "none";
+    scoreboard.style.display = "flex";
+}
+
+let time = 10;
+function startTimer() {
+    interval = setInterval(function () {
+        if (time > 0) {
+            timeLeft.innerHTML = `${time}`;
+            time--;
+        } else {
+            timeLeft.innerHTML = `0`;
+            console.log("time over");
+            clearInterval(interval);
+        }
+    }, 1000);
 }

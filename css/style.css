@@ -131,12 +131,14 @@ main {
 }
 
 #timeLeft {
+    display: inline-block;
     background-color: #123652;
     color: white;
     border-radius: 10px;
+    width: 2vw;
+    text-align: center;
 }
-
-.scoreboard {
+.currentScore {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -190,4 +192,10 @@ main {
 }
 .score {
     font-size: 5vh;
+}
+.scoreboard {
+    display: flex;
+    width: 50%;
+    font-size: 5vh;
+    flex-wrap: wrap;
 }
