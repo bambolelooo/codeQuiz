@@ -200,3 +200,11 @@ main {
     font-size: 5vh;
     flex-wrap: wrap;
 }
+
+.scoreboardWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
