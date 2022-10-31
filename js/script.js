@@ -21,6 +21,7 @@ const congrats = document.querySelector(".congrats");
 const scoreboard = document.querySelector(".scoreboard");
 const dependOnTimer = document.querySelector(".dependOnTimer");
 const viewHighScores = document.querySelector("#highScores");
+const scoreboardWrapper = document.querySelector(".scoreboardWrapper");
 
 const q1 = {
     q: `This is question 1. The corrct answer is 1`,
@@ -62,6 +63,8 @@ let questionCounter = [0, 0]; // [total, right]
 startButton[0].addEventListener("click", displayFirstQuestion);
 
 function displayFirstQuestion() {
+    console.log("disp1stquest");
+    questionCounter = [0, 0];
     time = defaultTime;
     startTimer();
     scoreboard.style.display = "flex";
@@ -69,6 +72,7 @@ function displayFirstQuestion() {
     questions.sort(() => Math.random() - 0.5); // shuffle the questions
     quiz.style.display = "flex";
     startButton[0].style.display = "none";
+    scoreboardWrapper.style.display = "none";
     let question = questions[questionCounter[0]];
     questionText.innerHTML = question.q;
     ans1.innerHTML = question.a1;
@@ -115,9 +119,12 @@ let scores = [];
 
 function enterName() {
     clearInterval(interval);
+    finalPage.style.display = "flex";
+    form.style.display = "flex";
     dependOnTimer.innerHTML = "Congratuations on completing this quiz.";
-    if (time === 0) {
+    if (timeOut) {
         dependOnTimer.innerHTML = "You're out of time :(";
+        timeOut = false;
     }
     currentScore.style.display = "flex";
     congrats.style.display = "flex";
@@ -185,19 +192,23 @@ function showScoreboard() {
     form.style.display = "none";
     currentScore.style.display = "flex";
     scoreboard.style.display = "flex";
+    scoreboardWrapper.style.display = "flex";
+    startButton[2].addEventListener("click", displayFirstQuestion);
 }
 
+let timeOut = false;
 function startTimer() {
     interval = setInterval(function () {
         if (time > 0) {
-            time--;
-            timeLeft.innerHTML = `${time}`;
+            time = time - 0.1;
+            timeLeft.innerHTML = `${Math.round(time)}`;
         } else {
+            timeOut = true;
             timeLeft.innerHTML = `0`;
             console.log("time over");
             clearInterval(interval);
             enterName();
         }
-    }, 1000);
+    }, 100);
 }
 viewHighScores.addEventListener("click", showScoreboard);
