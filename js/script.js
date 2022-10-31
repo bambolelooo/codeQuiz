@@ -114,6 +114,12 @@ function checkAnswerAndGoToNext(event) {
 }
 
 let scores = [];
+try {
+    let extracted = localStorage.getItem("scores");
+    scores = JSON.parse(extracted);
+} catch {
+    scores = [];
+}
 
 function enterName() {
     clearInterval(interval);
@@ -133,6 +139,7 @@ function showScore() {
     scores = scores.concat([
         [`${inputName.value}`, (questionCounter[1] / questions.length) * 100],
     ]);
+    localStorage.setItem("scores", JSON.stringify(scores));
     scores.sort(compareSecondColumn);
     console.log(scores);
     scoreButtons.style.display = "flex";
