@@ -208,3 +208,7 @@ main {
     align-items: center;
     justify-content: center;
 }
+.correctWrong {
+    width: 100%;
+    text-align: center;
+}

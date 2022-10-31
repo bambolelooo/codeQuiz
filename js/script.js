@@ -22,6 +22,7 @@ const scoreboard = document.querySelector(".scoreboard");
 const dependOnTimer = document.querySelector(".dependOnTimer");
 const viewHighScores = document.querySelector("#highScores");
 const scoreboardWrapper = document.querySelector(".scoreboardWrapper");
+const correctWrong = document.querySelector(".correctWrong");
 
 const q1 = {
     q: `This is question 1. The corrct answer is 1`,
@@ -64,6 +65,7 @@ startButton[0].addEventListener("click", displayFirstQuestion);
 
 function displayFirstQuestion() {
     console.log("disp1stquest");
+    correctWrong.innerHTML = `Result:`;
     questionCounter = [0, 0];
     time = defaultTime;
     startTimer();
@@ -89,14 +91,14 @@ function checkAnswerAndGoToNext(event) {
     if (ans.matches("button")) {
         // if the answer matches the correct in object
         if (ans.innerHTML === questions[questionCounter[0]].corr) {
-            console.log(`correct`);
+            displayCorrectWrong("Corerct!");
             questionCounter[1]++;
         } else {
             time = time - 5;
-            console.log(
+            displayCorrectWrong(
                 `you chose ${ans.innerHTML} the corrct was ${
                     questions[questionCounter[0]].corr
-                }`
+                }. -5 sec on timer for that.`
             );
         }
         questionCounter[0]++;
@@ -137,10 +139,7 @@ function showScore() {
     congrats.style.display = "none";
     finalPage.style.display = "block";
     scores = scores.concat([
-        [
-            `${inputName.value}`,
-            `${(questionCounter[1] / questions.length) * 100}%`,
-        ],
+        [`${inputName.value}`, (questionCounter[1] / questions.length) * 100],
     ]);
     scores.sort(compareSecondColumn);
     console.log(scores);
@@ -159,7 +158,7 @@ function compareSecondColumn(a, b) {
     if (a[1] === b[1]) {
         return 0;
     } else {
-        return a[1] < b[1] ? -1 : 1;
+        return a[1] > b[1] ? -1 : 1;
     }
 }
 
@@ -183,7 +182,11 @@ function showScoreboard() {
             div.style.display = "flex";
             div.style.alignItems = "center";
             div.style.justifyContent = "center";
-            div.innerHTML = `${scores[i][j]}`;
+            if (j === 0) {
+                div.innerHTML = `${scores[i][j]}`;
+            } else {
+                div.innerHTML = `${scores[i][j]}%`;
+            }
             scoreboard.appendChild(div);
         }
     }
@@ -211,4 +214,9 @@ function startTimer() {
         }
     }, 100);
 }
+
 viewHighScores.addEventListener("click", showScoreboard);
+
+function displayCorrectWrong(status) {
+    correctWrong.innerHTML = `Result: ${status}`;
+}
