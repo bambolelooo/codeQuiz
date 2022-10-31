@@ -18,52 +18,45 @@
         <header>
             <button id="highScores" class="button">View high scores</button>
             <div class="timer">
-                Time left: <span id="timeLeft">15</span> seconds
+                Time left: <span id="timeLeft">25</span> seconds
             </div>
         </header>
         <main>
             <div class="coolWave"></div>
             <button class="button answer startButton">Start the quiz!</button>
-            <div class="enterName"></div>
-            <section class="currentScore">
-                <div class="congrats">
-                    <div class="form">
-                        <p class="dependOnTimer">
-                            Congratuations on completing this quiz.
-                        </p>
-                        <p>Enter your name below to continue:</p>
-                        <input
-                            type="text"
-                            id="name"
-                            size="50%"
-                            style="
-                                background-color: #123652;
-                                color: white;
-                                border-radius: 10px;
-                                text-align: center;
-                            "
-                        />
-                        <button class="button continue">Continue</button>
-                    </div>
-                </div>
-                <div class="finalPage">
-                    <div class="score" style="text-align: center"></div>
-                    <div class="scoreButtons">
-                        <button class="button answer startButton">
-                            Do it again!
-                        </button>
-                        <button class="button answer viewScoreboard">
-                            View scoreboard
-                        </button>
-                    </div>
-                </div>
-                <div class="scoreboardWrapper">
-                    <section class="scoreboard"></section>
+            <section class="form currentScore">
+                <p class="dependOnTimer">
+                    Congratuations on completing this quiz.
+                </p>
+                <p>Enter your name below to continue:</p>
+                <input
+                    type="text"
+                    id="name"
+                    size="50%"
+                    style="
+                        background-color: #123652;
+                        color: white;
+                        border-radius: 10px;
+                        text-align: center;
+                    "
+                />
+                <button class="button continue">Continue</button>
+            </section>
+            <section class="finalPage">
+                <div class="score" style="text-align: center"></div>
+                <div class="scoreButtons">
                     <button class="button answer startButton">
-                        Start quiz!
+                        Do it again!
+                    </button>
+                    <button class="button answer viewScoreboard">
+                        View scoreboard
                     </button>
                 </div>
             </section>
+            <div class="scoreboardWrapper">
+                <section class="scoreboard"></section>
+                <button class="button answer startButton">Start quiz!</button>
+            </div>
             <section class="quiz">
                 <div class="question">
                     <p id="questionText"></p>
