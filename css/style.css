@@ -131,12 +131,13 @@ main {
 }
 
 #timeLeft {
-    display: inline-block;
+    display: inline-flex;
     background-color: #123652;
     color: white;
     border-radius: 10px;
-    width: 2vw;
-    text-align: center;
+    padding: 0 1vw;
+    justify-content: center;
+    align-items: center;
 }
 .currentScore {
     display: flex;
