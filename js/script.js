@@ -56,31 +56,27 @@ const q4 = {
     a4: `4`,
     corr: `4`,
 };
-defaultTime = 15;
+defaultTime = 25;
 const questions = [q1, q2, q3, q4];
-
+clearAll();
+startButton[0].style.display = "flex";
 let questionCounter = [0, 0]; // [total, right]
-
 startButton[0].addEventListener("click", displayFirstQuestion);
-
 function displayFirstQuestion() {
-    console.log("disp1stquest");
-    correctWrong.innerHTML = `Result:`;
+    clearAll();
+    correctWrong.textContent = `Result:`;
     questionCounter = [0, 0];
     time = defaultTime;
     startTimer();
     scoreboard.style.display = "flex";
-    currentScore.style.display = "none";
     questions.sort(() => Math.random() - 0.5); // shuffle the questions
     quiz.style.display = "flex";
-    startButton[0].style.display = "none";
-    scoreboardWrapper.style.display = "none";
     let question = questions[questionCounter[0]];
-    questionText.innerHTML = question.q;
-    ans1.innerHTML = question.a1;
-    ans2.innerHTML = question.a2;
-    ans3.innerHTML = question.a3;
-    ans4.innerHTML = question.a4;
+    questionText.textContent = question.q;
+    ans1.textContent = question.a1;
+    ans2.textContent = question.a2;
+    ans3.textContent = question.a3;
+    ans4.textContent = question.a4;
     answerContainer.addEventListener("click", checkAnswerAndGoToNext);
 }
 
@@ -90,13 +86,13 @@ function checkAnswerAndGoToNext(event) {
     // check if clicked on button
     if (ans.matches("button")) {
         // if the answer matches the correct in object
-        if (ans.innerHTML === questions[questionCounter[0]].corr) {
+        if (ans.textContent === questions[questionCounter[0]].corr) {
             displayCorrectWrong("Corerct!");
             questionCounter[1]++;
         } else {
             time = time - 5;
             displayCorrectWrong(
-                `you chose ${ans.innerHTML} the corrct was ${
+                `you chose ${ans.textContent} the corrct was ${
                     questions[questionCounter[0]].corr
                 }. -5 sec on timer for that.`
             );
@@ -107,11 +103,11 @@ function checkAnswerAndGoToNext(event) {
             enterName();
         } else {
             let question = questions[questionCounter[0]];
-            questionText.innerHTML = question.q;
-            ans1.innerHTML = question.a1;
-            ans2.innerHTML = question.a2;
-            ans3.innerHTML = question.a3;
-            ans4.innerHTML = question.a4;
+            questionText.textContent = question.q;
+            ans1.textContent = question.a1;
+            ans2.textContent = question.a2;
+            ans3.textContent = question.a3;
+            ans4.textContent = question.a4;
             console.log(`question ${questionCounter[0] + 1} displayed`);
         }
     }
@@ -121,35 +117,29 @@ let scores = [];
 
 function enterName() {
     clearInterval(interval);
-    finalPage.style.display = "flex";
-    form.style.display = "flex";
-    dependOnTimer.innerHTML = "Congratuations on completing this quiz.";
+    clearAll();
+    currentScore.style.display = "flex";
+    dependOnTimer.textContent = "Congratuations on completing this quiz.";
     if (timeOut) {
-        dependOnTimer.innerHTML = "You're out of time :(";
+        dependOnTimer.textContent = "You're out of time :(";
         timeOut = false;
     }
-    currentScore.style.display = "flex";
-    congrats.style.display = "flex";
-    quiz.style.display = "none";
-    finalPage.style.display = "none";
     continueButton.addEventListener("click", showScore);
 }
 
 function showScore() {
-    congrats.style.display = "none";
-    finalPage.style.display = "block";
+    clearAll();
+    finalPage.style.display = "flex";
     scores = scores.concat([
         [`${inputName.value}`, (questionCounter[1] / questions.length) * 100],
     ]);
     scores.sort(compareSecondColumn);
     console.log(scores);
     scoreButtons.style.display = "flex";
-    score.innerHTML = `${questionCounter[1]}
+    score.textContent = `${questionCounter[1]}
     correct out of ${questions.length} (${
         (questionCounter[1] / questions.length) * 100
     }%)`;
-
-    questionCounter = [0, 0];
     startButton[1].addEventListener("click", displayFirstQuestion);
     viewScoreboard.addEventListener("click", showScoreboard);
 }
@@ -163,6 +153,7 @@ function compareSecondColumn(a, b) {
 }
 
 function showScoreboard() {
+    clearAll();
     console.log(`showScoreboard`);
     try {
         clearInterval(interval);
@@ -183,18 +174,13 @@ function showScoreboard() {
             div.style.alignItems = "center";
             div.style.justifyContent = "center";
             if (j === 0) {
-                div.innerHTML = `${scores[i][j]}`;
+                div.textContent = `${scores[i][j]}`;
             } else {
-                div.innerHTML = `${scores[i][j]}%`;
+                div.textContent = `${scores[i][j]}%`;
             }
             scoreboard.appendChild(div);
         }
     }
-    quiz.style.display = "none";
-    finalPage.style.display = "none";
-    form.style.display = "none";
-    currentScore.style.display = "flex";
-    scoreboard.style.display = "flex";
     scoreboardWrapper.style.display = "flex";
     startButton[2].addEventListener("click", displayFirstQuestion);
 }
@@ -204,10 +190,10 @@ function startTimer() {
     interval = setInterval(function () {
         if (time > 0) {
             time = time - 0.1;
-            timeLeft.innerHTML = `${Math.round(time)}`;
+            timeLeft.textContent = `${Math.round(time)}`;
         } else {
             timeOut = true;
-            timeLeft.innerHTML = `0`;
+            timeLeft.textContent = `0`;
             console.log("time over");
             clearInterval(interval);
             enterName();
@@ -218,5 +204,13 @@ function startTimer() {
 viewHighScores.addEventListener("click", showScoreboard);
 
 function displayCorrectWrong(status) {
-    correctWrong.innerHTML = `Result: ${status}`;
+    correctWrong.textContent = `Result: ${status}`;
+}
+
+function clearAll() {
+    startButton[0].style.display = "none";
+    currentScore.style.display = "none";
+    finalPage.style.display = "none";
+    scoreboardWrapper.style.display = "none";
+    quiz.style.display = "none";
 }

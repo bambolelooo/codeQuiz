@@ -46,7 +46,7 @@ main {
 
 .quiz {
     background-color: white;
-    height: 70vh;
+    height: 100%;
     width: 90%;
     border-radius: 2vmin;
     display: flex;
@@ -139,17 +139,6 @@ main {
     justify-content: center;
     align-items: center;
 }
-.currentScore {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    height: 70vh;
-    width: 90%;
-    border-radius: 2vmin;
-    padding: 1vh 2vw;
-    align-items: center;
-    justify-content: center;
-}
 
 .congrats {
     display: flex;
@@ -165,6 +154,7 @@ main {
 .scoreButtons {
     display: flex;
     gap: 5vw;
+    justify-content: center;
 }
 
 .continue {
@@ -187,10 +177,16 @@ main {
 .form {
     display: flex;
     flex-direction: column;
+    background-color: white;
+    width: 90%;
+    border-radius: 2vmin;
+    padding: 1vh 2vw;
     align-items: center;
-    justify-content: center;
-    row-gap: 2vh;
+    justify-content: space-evenly;
+    height: 100%;
+    font-size: 3vh;
 }
+
 .score {
     font-size: 5vh;
 }
@@ -204,11 +200,27 @@ main {
 .scoreboardWrapper {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 70%;
     align-items: center;
     justify-content: center;
+    background-color: white;
+    border-radius: 10px;
+    height: 100%;
 }
 .correctWrong {
     width: 100%;
     text-align: center;
+}
+
+.finalPage {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 70%;
+    border-radius: 2vmin;
+    padding: 1vh 2vw;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 3vh;
 }
