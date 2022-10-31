@@ -19,6 +19,8 @@ const viewScoreboard = document.querySelector(".viewScoreboard");
 const form = document.querySelector(".form");
 const congrats = document.querySelector(".congrats");
 const scoreboard = document.querySelector(".scoreboard");
+const dependOnTimer = document.querySelector(".dependOnTimer");
+const viewHighScores = document.querySelector("#highScores");
 
 const q1 = {
     q: `This is question 1. The corrct answer is 1`,
@@ -52,7 +54,7 @@ const q4 = {
     a4: `4`,
     corr: `4`,
 };
-
+defaultTime = 15;
 const questions = [q1, q2, q3, q4];
 
 let questionCounter = [0, 0]; // [total, right]
@@ -60,6 +62,7 @@ let questionCounter = [0, 0]; // [total, right]
 startButton[0].addEventListener("click", displayFirstQuestion);
 
 function displayFirstQuestion() {
+    time = defaultTime;
     startTimer();
     scoreboard.style.display = "flex";
     currentScore.style.display = "none";
@@ -111,6 +114,11 @@ function checkAnswerAndGoToNext(event) {
 let scores = [];
 
 function enterName() {
+    clearInterval(interval);
+    dependOnTimer.innerHTML = "Congratuations on completing this quiz.";
+    if (time === 0) {
+        dependOnTimer.innerHTML = "You're out of time :(";
+    }
     currentScore.style.display = "flex";
     congrats.style.display = "flex";
     quiz.style.display = "none";
@@ -134,6 +142,7 @@ function showScore() {
     correct out of ${questions.length} (${
         (questionCounter[1] / questions.length) * 100
     }%)`;
+
     questionCounter = [0, 0];
     startButton[1].addEventListener("click", displayFirstQuestion);
     viewScoreboard.addEventListener("click", showScoreboard);
@@ -143,11 +152,20 @@ function compareSecondColumn(a, b) {
     if (a[1] === b[1]) {
         return 0;
     } else {
-        return a[1] > b[1] ? -1 : 1;
+        return a[1] < b[1] ? -1 : 1;
     }
 }
 
 function showScoreboard() {
+    console.log(`showScoreboard`);
+    try {
+        clearInterval(interval);
+    } catch {}
+    let first = scoreboard.firstElementChild;
+    while (first) {
+        first.remove();
+        first = scoreboard.firstElementChild;
+    }
     for (let i = 0; i < scores.length; i++) {
         for (let j = 0; j < 2; j++) {
             let div = document.createElement("div");
@@ -162,20 +180,24 @@ function showScoreboard() {
             scoreboard.appendChild(div);
         }
     }
+    quiz.style.display = "none";
     finalPage.style.display = "none";
+    form.style.display = "none";
+    currentScore.style.display = "flex";
     scoreboard.style.display = "flex";
 }
 
-let time = 10;
 function startTimer() {
     interval = setInterval(function () {
         if (time > 0) {
-            timeLeft.innerHTML = `${time}`;
             time--;
+            timeLeft.innerHTML = `${time}`;
         } else {
             timeLeft.innerHTML = `0`;
             console.log("time over");
             clearInterval(interval);
+            enterName();
         }
     }, 1000);
 }
+viewHighScores.addEventListener("click", showScoreboard);
