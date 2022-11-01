@@ -1,3 +1,4 @@
+// defining consts
 const questionText = document.querySelector("#questionText");
 const ans1 = document.querySelector("#ans1");
 const ans2 = document.querySelector("#ans2");
@@ -56,8 +57,8 @@ const q4 = {
     a4: `4`,
     corr: `4`,
 };
-defaultTime = 25;
-const questions = [q1, q2, q3, q4];
+defaultTime = 25; // set time of quiz
+const questions = [q1, q2, q3, q4]; // array of questions
 clearAll();
 startButton[0].style.display = "flex";
 let questionCounter = [0, 0]; // [total, right]
@@ -114,13 +115,8 @@ function checkAnswerAndGoToNext(event) {
 }
 
 let scores = [];
-try {
-    let extracted = localStorage.getItem("scores");
-    scores = JSON.parse(extracted);
-} catch {
-    scores = [];
-}
 
+// enter name
 function enterName() {
     clearInterval(interval);
     clearAll();
@@ -133,13 +129,13 @@ function enterName() {
     continueButton.addEventListener("click", showScore);
 }
 
+//show individual score
 function showScore() {
     clearAll();
     finalPage.style.display = "flex";
     scores = scores.concat([
         [`${inputName.value}`, (questionCounter[1] / questions.length) * 100],
     ]);
-    localStorage.setItem("scores", JSON.stringify(scores));
     scores.sort(compareSecondColumn);
     console.log(scores);
     scoreButtons.style.display = "flex";
@@ -159,6 +155,7 @@ function compareSecondColumn(a, b) {
     }
 }
 
+// display scoreboard
 function showScoreboard() {
     clearAll();
     console.log(`showScoreboard`);
@@ -192,6 +189,7 @@ function showScoreboard() {
     startButton[2].addEventListener("click", displayFirstQuestion);
 }
 
+// timer on top right of page
 let timeOut = false;
 function startTimer() {
     interval = setInterval(function () {
@@ -210,10 +208,12 @@ function startTimer() {
 
 viewHighScores.addEventListener("click", showScoreboard);
 
+//display wrong or correct
 function displayCorrectWrong(status) {
     correctWrong.textContent = `Result: ${status}`;
 }
 
+//makes all sections to display none
 function clearAll() {
     startButton[0].style.display = "none";
     currentScore.style.display = "none";

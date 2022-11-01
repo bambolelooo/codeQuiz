@@ -64,11 +64,13 @@ main {
     height: 100%;
 }
 
+/* question text */
 #questionText {
     text-align: center;
     padding: 2vh 1vw;
 }
 
+/* answer buttons */
 .answerContainer {
     display: flex;
     flex-wrap: wrap;
@@ -76,7 +78,7 @@ main {
     gap: 5%;
 }
 
-/* beautiful buttons */
+/* making buttons beautiful */
 .button {
     display: inline;
     position: relative;
