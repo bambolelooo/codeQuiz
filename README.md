@@ -4,7 +4,7 @@
     Website with sample quiz of 4 easy questions
     <br />
     <br />
-    <a href="https://bambolelooo.github.io/passwordGenerator/">Visit website</a>
+    <a href="https://bambolelooo.github.io/codeQuiz/">Visit website</a>
   </p>
 </div>
   <p align="center">
